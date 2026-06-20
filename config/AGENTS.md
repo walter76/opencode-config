@@ -141,6 +141,13 @@ type overrides, TODO with context), JSDoc for public APIs in JavaScript.
 When you learn something that updates/contradicts an earlier finding, explicitly note:
 > "UPDATE: [old understanding] → [new understanding]"
 
+## Documentation Workflow
+
+### Instruction Hierarchy
+
+1. **Global rules** (`~/.config/opencode/AGENTS.md`) — base behaviors
+2. **Team project rules** (`{project-root}/CLAUDE.md`, `AGENTS.md`) — team-shared
+
 ## Subtask Workflow
 
 **Default: Synchronous.** Spawn Task, wait for completion, get results directly.
