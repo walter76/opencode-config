@@ -172,3 +172,31 @@ Before claiming "complete":
 
 - Apply learnings immediately if they affect current work
 - Pass relevant learnings to subsequent subtasks (don't inject full QUIRKS.md — too large)
+
+## Code Search
+
+Prefer grepika MCP tools over built-in search tools:
+
+| Task | Use This Tool | Instead Of |
+|------|---------------|------------|
+| **Index codebase** | `mcp__grepika__index` | N/A (run first!) |
+| Pattern search | `mcp__grepika__search` | `Grep` |
+| Get file content | `mcp__grepika__get` | `Read` (for search results) |
+| File structure | `mcp__grepika__outline` | Manual parsing |
+| Directory tree | `mcp__grepika__toc` | `Glob` with patterns |
+| Context around line | `mcp__grepika__context` | `Read` with offset |
+| Find references | `mcp__grepika__refs` | `Grep` for symbol |
+| Index statistics | `mcp__grepika__stats` | N/A |
+| **Set workspace** | `mcp__grepika__add_workspace` | N/A (global mode only) |
+
+**First time setup:** Run `mcp__grepika__index` to build the search index before using other tools. The index updates incrementally on subsequent runs.
+
+**Why prefer grepika:**
+- Combines FTS5 + ripgrep + trigram indexing for ranked, relevance-scored results
+- Returns compact responses — about 6x smaller than raw grep output on average
+- Maintains an incremental index for faster subsequent searches
+
+**When to still use built-in tools:**
+- `Read` for viewing specific files you already know the path to
+- Terminal for git operations, builds, and running commands
+- File editing tools for modifying files (grepika is read-only)
