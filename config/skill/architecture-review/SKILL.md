@@ -1,6 +1,6 @@
 ---
 name: architecture-review
-description: Create architecture review documents to understand and document existing codebases. Use when onboarding to an unfamiliar codebase, conducting architecture audits, or creating reference documentation for team members.
+description: Create architecture review documents to understand and document existing codebases. Use when onboarding to an unfamiliar codebase, conducting architecture audits, or creating reference documentation for myself or team members.
 ---
 
 # Architecture Review Skill
@@ -11,26 +11,24 @@ Create architecture review documents that comprehensively document an existing c
 
 - Onboarding to an unfamiliar codebase
 - Starting significant work in a new area
-- Creating reference documentation for team members
+- Creating reference documentation for team members or myself
 - Architecture audits or technical reviews
 - Documenting a system before major refactoring
 
 **Don't use for:**
-- Planning new features (use `feature-design` skill)
-- Tracking work progress (use `progress-update` skill)
+- Planning new features
+- Tracking work progress
 - Strategic project context (use `project-overview` skill)
 
 ## File Location
 
-Architecture reviews live in the dev-plans repository:
+Architecture reviews live in the repository root under `doc`:
 
 ```
-dev-plans/
-└── {project}/
-    ├── architecture/
-    │   ├── 2025-12-29-backend-architecture.md
-    │   └── 2025-12-15-api-layer-review.md
-    └── current-focus.md
+doc/
+└── architecture/
+    ├── 2025-12-29-backend-architecture.md
+    └── 2025-12-15-api-layer-review.md
 ```
 
 **Naming:** `YYYY-MM-DD-{system-or-area}-architecture.md`
@@ -66,8 +64,8 @@ Document the languages, frameworks, and key dependencies.
 ```markdown
 ## Tech Stack
 
-**Language(s):** [TypeScript, Python, Go, etc.]
-**Framework(s):** [React, Express, FastAPI, etc.]
+**Language(s):** [Rust, C#, JavaScript, etc.]
+**Framework(s):** [.NET, React, React MUI Joy, etc.]
 **Runtime:** [Node.js, Bun, Deno, etc.]
 
 ### Key Dependencies
@@ -141,8 +139,8 @@ Document the major systems/subsystems and how they work.
 
 **Purpose:** [What this system does]
 **Key Files:** 
-- `path/to/main-file.ts`
-- `path/to/related-file.ts`
+- `path/to/main-file.rs`
+- `path/to/related-file.rs`
 
 [2-4 paragraphs explaining how this system works, its responsibilities, and how it fits into the larger architecture]
 
@@ -150,7 +148,7 @@ Document the major systems/subsystems and how they work.
 
 [Detailed explanation with code snippets if helpful]
 
-```typescript
+```rust
 // Example showing key pattern
 ```
 
@@ -210,11 +208,11 @@ Document important types, interfaces, and data shapes.
 **Location:** `path/to/types.ts`
 **Purpose:** [What this represents]
 
-```typescript
-interface AppState {
-  user: User | null;
-  settings: Settings;
-  // ... key fields
+```rust
+struct AppState {
+    user: Option<User>,
+    settings: Settings,
+    // ... key fields
 }
 ```
 
@@ -244,7 +242,7 @@ Document recurring patterns used throughout the codebase.
 **Where:** [Where this pattern is used]
 **Why:** [Why this pattern was chosen]
 
-```typescript
+```rust
 // Example implementation
 ```
 
@@ -270,8 +268,8 @@ Quick reference to important files.
 ### Entry Points
 | File | Purpose |
 |------|---------|
-| `src/index.ts` | Application entry point |
-| `src/App.tsx` | Root component |
+| `src/index.js` | Application entry point |
+| `src/App.jsx` | Root component |
 
 ### Configuration
 | File | Purpose |
