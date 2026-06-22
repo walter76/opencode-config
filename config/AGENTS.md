@@ -5,7 +5,7 @@ Standard behaviors that OpenCode should always follow.
 ## Quick Reference - Critical Rules
 
 - **Never auto-commit** - always wait for explicit user instruction
-- **Plan before implement** - non-trivial tasks require approval bevore coding
+- **Plan before implement** - non-trivial tasks require approval before coding
 - **No sycophancy** - no "You're absolutely right!", no empty validation
 - **Escalate after 2 failures** - stop, analyze, try a different approach
 - **Minimize context** - read outlines first, then targeted sections
@@ -32,7 +32,7 @@ Be extremely concise in all interactions and commit messages. Sacrifice grammar 
 
 ### Appropriate Acknowledgements
 
-Use brief, factual acknowledgements only when they add clarify:
+Use brief, factual acknowledgements only when they add clarity:
 
 - "Got it." / "I understand." / "I see the issue."
 - Only when you genuinely understand and it clarifies what you'll do next
@@ -101,8 +101,8 @@ Only commit when user explicitly says "commit this" or includes a commit step in
 ### JavaScript
 
 - Prefer JavaScript
-- Code Style Prettier config (`.prettierrc`): single quotes, no semicolons, trailing commas, 100-char line width,
-  2-space indent.
+- Code style follows Prettier config (`.prettierrc`): single quotes, no semicolons, trailing commas,
+  100-char line width, 2-space indent.
 
 ### Rust
 
@@ -121,6 +121,34 @@ type overrides, TODO with context), JSDoc for public APIs in JavaScript.
 ## Code Navigation & File Reading
 
 **Primary principle: minimize context consumption.** Read outlines first, then targeted sections. Be surgical.
+
+### Code Search
+
+Prefer grepika MCP tools over built-in search tools:
+
+| Task | Use This Tool | Instead Of |
+|------|---------------|------------|
+| **Index codebase** | `mcp__grepika__index` | N/A (run first!) |
+| Pattern search | `mcp__grepika__search` | `Grep` |
+| Get file content | `mcp__grepika__get` | `Read` (for search results) |
+| File structure | `mcp__grepika__outline` | Manual parsing |
+| Directory tree | `mcp__grepika__toc` | `Glob` with patterns |
+| Context around line | `mcp__grepika__context` | `Read` with offset |
+| Find references | `mcp__grepika__refs` | `Grep` for symbol |
+| Index statistics | `mcp__grepika__stats` | N/A |
+| **Set workspace** | `mcp__grepika__add_workspace` | N/A (global mode only) |
+
+**First time setup:** Run `mcp__grepika__index` to build the search index before using other tools. The index updates incrementally on subsequent runs.
+
+**Why prefer grepika:**
+- Combines FTS5 + ripgrep + trigram indexing for ranked, relevance-scored results
+- Returns compact responses — about 6x smaller than raw grep output on average
+- Maintains an incremental index for faster subsequent searches
+
+**When to still use built-in tools:**
+- `Read` for viewing specific files you already know the path to
+- Terminal for git operations, builds, and running commands
+- File editing tools for modifying files (grepika is read-only)
 
 ## Core Behavioral Rules
 
@@ -172,31 +200,3 @@ Before claiming "complete":
 
 - Apply learnings immediately if they affect current work
 - Pass relevant learnings to subsequent subtasks (don't inject full QUIRKS.md — too large)
-
-## Code Search
-
-Prefer grepika MCP tools over built-in search tools:
-
-| Task | Use This Tool | Instead Of |
-|------|---------------|------------|
-| **Index codebase** | `mcp__grepika__index` | N/A (run first!) |
-| Pattern search | `mcp__grepika__search` | `Grep` |
-| Get file content | `mcp__grepika__get` | `Read` (for search results) |
-| File structure | `mcp__grepika__outline` | Manual parsing |
-| Directory tree | `mcp__grepika__toc` | `Glob` with patterns |
-| Context around line | `mcp__grepika__context` | `Read` with offset |
-| Find references | `mcp__grepika__refs` | `Grep` for symbol |
-| Index statistics | `mcp__grepika__stats` | N/A |
-| **Set workspace** | `mcp__grepika__add_workspace` | N/A (global mode only) |
-
-**First time setup:** Run `mcp__grepika__index` to build the search index before using other tools. The index updates incrementally on subsequent runs.
-
-**Why prefer grepika:**
-- Combines FTS5 + ripgrep + trigram indexing for ranked, relevance-scored results
-- Returns compact responses — about 6x smaller than raw grep output on average
-- Maintains an incremental index for faster subsequent searches
-
-**When to still use built-in tools:**
-- `Read` for viewing specific files you already know the path to
-- Terminal for git operations, builds, and running commands
-- File editing tools for modifying files (grepika is read-only)
