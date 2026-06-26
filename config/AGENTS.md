@@ -90,6 +90,28 @@ When completing code changes:
 
 Only commit when user explicitly says "commit this" or includes a commit step in instructions.
 
+For each commit:
+- only use one-line commit messages
+- do not include that it has been created by a GenAI or similar phrases
+
+### Use Conventional Commits
+
+The commit message should be structured as follows `<type>[optional scope]: <description>`.
+
+The commit contains the following structural elements, to communicate intent:
+
+1. __fix:__ a commit of the _type_ `fix` patches a bug in the codebase (this correlates with __PATCH__ in Semantic Versioning)
+2. __feat:__ a commit of the _type_ `feat` introduces a new feature to the codebase (this correlates with __MINOR__ in Semantic Versioning)
+3. _types_ other than `fix:` or `feat:` are allowed: `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
+
+**Examples:**
+
+- Commit message with description: `feat: allow provided config object to extend other configs`
+- Commit message with `!` to draw attention to breaking change: `feat!: send an email to the customer when a product is shipped`
+- Commit message with scope and `!` to draw attention to breaking change: `feat(api)!: send any email to the customer when a product is shipped`
+- Commit message for docs: `docs: correct spelling of CHANGELOG`
+- Commit message with scope: `feat(lang): add Polish language`
+
 ## Environment & Platform
 
 ### Development Environment
