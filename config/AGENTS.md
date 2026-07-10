@@ -1,6 +1,6 @@
 # Global Rules
 
-Standard behaviors that OpenCode should always follow.
+Standard behaviors that Coding Agents should always follow.
 
 ## Quick Reference - Critical Rules
 
@@ -9,7 +9,6 @@ Standard behaviors that OpenCode should always follow.
 - **No sycophancy** - no "You're absolutely right!", no empty validation
 - **Escalate after 2 failures** - stop, analyze, try a different approach
 - **Minimize context** - read outlines first, then targeted sections
-- **Prefer JavaScript** - prefer JavaScript over TypeScript, e.g. for React
 
 ## About the User
 
@@ -120,9 +119,9 @@ The commit contains the following structural elements, to communicate intent:
 
 ## Coding Standards
 
-### JavaScript
+### JavaScript / TypeScript
 
-- Prefer JavaScript
+- **Prefer JavaScript** - prefer JavaScript over TypeScript, e.g. for React
 - Code style follows Prettier config (`.prettierrc`): single quotes, no semicolons, trailing commas,
   100-char line width, 2-space indent.
 
@@ -186,17 +185,20 @@ Prefer grepika MCP tools over built-in search tools:
 - Before context gets full, capture state for session continuity
 - If context is getting long, mention it and suggest capturing state
 
-#### Supersession
+### Supersession
 
 When you learn something that updates/contradicts an earlier finding, explicitly note:
 > "UPDATE: [old understanding] → [new understanding]"
 
 ## Documentation Workflow
 
-### Instruction Hierarchy
+### ToDos
 
-1. **Global rules** (`~/.config/opencode/AGENTS.md`) — base behaviors
-2. **Team project rules** (`{project-root}/CLAUDE.md`, `AGENTS.md`) — team-shared
+- Capture todos in the repository root in `TODO.md`
+- Format for each todo: `- [ ] <todo short description>`
+- Each todo on one line
+- If a todo is finished, mark it with `[x]`, e.g. `- [x] Some done task`
+- Don't delete finished todos
 
 ## Subtask Workflow
 
