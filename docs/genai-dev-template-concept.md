@@ -1,8 +1,7 @@
 # GenAI-Assisted Development — Repo Template Concept
 
-Concept for a repository template to be rolled out across multiple SHS-CT
-repos, providing a consistent structure for developing software with GenAI
-coding agents (Claude Code etc.).
+Concept for a repository template to be rolled out across multiple repos, providing a consistent structure for
+developing software with GenAI coding agents (Claude Code etc.).
 
 ## 1. Overview
 
