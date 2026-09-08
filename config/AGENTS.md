@@ -219,6 +219,7 @@ When you learn something that updates/contradicts an earlier finding, explicitly
 - When marking `status: completed`, fill in the `## Outcome` section and remove the `## Current state` section.
 - When `status: blocked`, fill in `## Current state` with open questions and next steps.
 - See `sessions/template.md` for the log structure.
+- **Don't initialize a new session for simple tasks, e.g. creating a new task, one line fixes etc.**
 
 ## Subtask Workflow
 
