@@ -28,6 +28,15 @@ enum Command {
         /// The slug identifying the task to plan.
         task_slug: String,
     },
+    /// Send an implementation task to the Implementer pane.
+    Implement {
+        /// The zellij session to send the implementation task to.
+        #[arg(short = 's', long, default_value = "coding-agents")]
+        session: String,
+
+        /// The slug identifying the task to implement.
+        task_slug: String,
+    },
 }
 
 fn main() {
@@ -54,6 +63,16 @@ fn main() {
 
             if let Err(error) = zellij::send_to_pane(&session, "Planner", &message) {
                 eprintln!("Unable to send plan to the Planner pane: {error}");
+                std::process::exit(1);
+            }
+        }
+        Command::Implement { session, task_slug } => {
+            let message = format!(
+                "Implement the plan provided in the session log for the task {task_slug}.\r"
+            );
+
+            if let Err(error) = zellij::send_to_pane(&session, "Implementer", &message) {
+                eprintln!("Unable to send implementation task to the Implementer pane: {error}");
                 std::process::exit(1);
             }
         }

@@ -48,7 +48,8 @@ fn find_pane_id(value: &serde_json::Value, pane_name: &str) -> Option<String> {
             if object.get("title").and_then(serde_json::Value::as_str) == Some(pane_name) {
                 return object
                     .get("id")
-                    .and_then(|s| Some(format!("terminal_{}", s))).as_deref()
+                    .and_then(|s| Some(format!("terminal_{}", s)))
+                    .as_deref()
                     .map(str::to_owned);
             }
 
