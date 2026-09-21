@@ -49,7 +49,7 @@ fn main() {
         Command::Plan { session, task_slug } => {
             let message = format!(
                 "Create a new session for the task {task_slug}. Afterwards create an implementation \
-                 plan for the task and persist it in the created session log file."
+                 plan for the task and persist it in the created session log file.\r"
             );
 
             if let Err(error) = zellij::send_to_pane(&session, "Planner", &message) {
