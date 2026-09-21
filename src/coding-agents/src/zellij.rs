@@ -2,7 +2,15 @@ use std::io;
 use std::process::Command;
 
 pub fn list_sessions() -> io::Result<String> {
-    let output = Command::new("zellij").arg("list-sessions").output()?;
+    run_command(["list-sessions"])
+}
+
+pub fn list_panes(session: &str) -> io::Result<String> {
+    run_command(["--session", session, "action", "list-panes"])
+}
+
+fn run_command<const N: usize>(args: [&str; N]) -> io::Result<String> {
+    let output = Command::new("zellij").args(args).output()?;
 
     if !output.status.success() {
         let message = String::from_utf8_lossy(&output.stderr);
