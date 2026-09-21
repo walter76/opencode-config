@@ -19,6 +19,11 @@ enum Command {
         #[arg(short = 's', long, default_value = "coding-agents")]
         session: String,
     },
+    /// Send a planning task to the Planner pane.
+    Plan {
+        /// The slug identifying the task to plan.
+        task_slug: String,
+    },
 }
 
 fn main() {
@@ -37,5 +42,16 @@ fn main() {
                 std::process::exit(1);
             }
         },
+        Command::Plan { task_slug } => {
+            let message = format!(
+                "Create a new session for the task {task_slug}. Afterwards create an implementation \
+                 plan for the task and persist it in the created session log file."
+            );
+
+            if let Err(error) = zellij::send_to_pane("coding-agents", "Planner", &message) {
+                eprintln!("Unable to send plan to the Planner pane: {error}");
+                std::process::exit(1);
+            }
+        }
     }
 }
