@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand};
+use std::fs;
 
 mod zellij;
 
@@ -46,6 +47,8 @@ enum Command {
         /// The slug identifying the task to review.
         task_slug: String,
     },
+    /// Show the repository task board.
+    ListTasks,
 }
 
 fn main() {
@@ -96,5 +99,12 @@ fn main() {
                 std::process::exit(1);
             }
         }
+        Command::ListTasks => match fs::read_to_string("tasks/BOARD.md") {
+            Ok(board) => print!("{board}"),
+            Err(error) => {
+                eprintln!("Unable to read tasks/BOARD.md: {error}");
+                std::process::exit(1);
+            }
+        },
     }
 }
