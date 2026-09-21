@@ -45,10 +45,10 @@ fn list_panes_json(session: &str) -> io::Result<String> {
 fn find_pane_id(value: &serde_json::Value, pane_name: &str) -> Option<String> {
     match value {
         serde_json::Value::Object(object) => {
-            if object.get("name").and_then(serde_json::Value::as_str) == Some(pane_name) {
+            if object.get("title").and_then(serde_json::Value::as_str) == Some(pane_name) {
                 return object
-                    .get("pane_id")
-                    .and_then(serde_json::Value::as_str)
+                    .get("id")
+                    .and_then(|s| Some(format!("terminal_{}", s))).as_deref()
                     .map(str::to_owned);
             }
 
