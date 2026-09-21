@@ -37,6 +37,15 @@ enum Command {
         /// The slug identifying the task to implement.
         task_slug: String,
     },
+    /// Send a review task to the Reviewer pane.
+    Review {
+        /// The zellij session to send the review task to.
+        #[arg(short = 's', long, default_value = "coding-agents")]
+        session: String,
+
+        /// The slug identifying the task to review.
+        task_slug: String,
+    },
 }
 
 fn main() {
@@ -73,6 +82,17 @@ fn main() {
 
             if let Err(error) = zellij::send_to_pane(&session, "Implementer", &message) {
                 eprintln!("Unable to send implementation task to the Implementer pane: {error}");
+                std::process::exit(1);
+            }
+        }
+        Command::Review { session, task_slug } => {
+            let message = format!(
+                "The implementer has implemented the solution as described by the implementation \
+                 plan in the session log for the task {task_slug}. Review the changes.\r"
+            );
+
+            if let Err(error) = zellij::send_to_pane(&session, "Reviewer", &message) {
+                eprintln!("Unable to send review task to the Reviewer pane: {error}");
                 std::process::exit(1);
             }
         }
